@@ -2,5 +2,33 @@
 title: "Quarto 1"
 author: Kellen
 format: html
+execute: 
+    echo: false
+    message: false
+    warning: false
 ---
 
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+```
+
+```{r}
+ggplot(data = penguins, aes(x = flipper_length_mm, y = bill_length_mm, color = species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, aes(color = species), linetype = "dashed") +
+  labs(
+    title = "Bill Length vs. Flipper Length in Penguins",
+    subtitle = "Separated by Species",
+    x = "Flipper Length (mm)",
+    y = "Bill Length (mm)",
+    color = "Species",
+    caption = "Data: palmerpenguins package"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "top"
+  )
+```
